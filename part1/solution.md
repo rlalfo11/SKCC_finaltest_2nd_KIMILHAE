@@ -188,7 +188,6 @@
 	
 # 4. Create and run a Hive/Impla query.
 ## 4.a~c
-	- 작성자와 작성자가 작성한 게시물의 개수를 쿼리하여 /results 에 저장
 	insert overwrite directory '/results'
 	row format delimited fields terminated by '\t'
 	select A.id,

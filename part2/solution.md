@@ -149,7 +149,7 @@
 
 ## problem 11
 
-11-a.
+	11-a.
 	select brand, name, COUNT(p.prod_id) AS sold
 	from products p
 	join order_details d

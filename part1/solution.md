@@ -174,3 +174,16 @@
 
 	FLUSH PRIVILEGES;	
 	Query OK, 0 rows affected (0.00 sec)
+
+# 3. Extract tables authors and posts
+## 3.a~c
+	- sqoop import
+	sqoop import --connect jdbc:mysql://cm.rlalfo.com/test --username training --password training --table authors --target-dir /authors_2
+	sqoop import --connect jdbc:mysql://cm.rlalfo.com/test --username training --password training --table posts --target-dir /posts_2
+
+## 3.d~g
+	- sqoop import with hive direct
+	sqoop import --connect jdbc:mysql://cm.rlalfo.com/test --username root --password password --table authors --target-dir /authors --hive-import --create-hive-table --hive-table default.authors
+	sqoop import --connect jdbc:mysql://cm.rlalfo.com/test --username root --password password --table posts --target-dir /posts --hive-import --create-hive-table --hive-table default.posts
+	
+# 4. Create and run a Hive/Impla query.

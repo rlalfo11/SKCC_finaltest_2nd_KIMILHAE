@@ -148,7 +148,8 @@
 	CREATE DATABASE test;
 	EXIT;
 ## 2.b
-    FTP를 활용해 쿼리 파일 cm 노드로 이동
+   	FTP를 활용해 쿼리 파일 cm 노드로 이동 후 명령어 입력 진행
+    
 	$ mysql -u root -p test < ./authors.sql
 	$ mysql -u root -p test < ./posts.sql
 

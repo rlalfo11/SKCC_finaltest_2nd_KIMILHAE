@@ -187,3 +187,28 @@
 	sqoop import --connect jdbc:mysql://cm.rlalfo.com/test --username root --password password --table posts --target-dir /posts --hive-import --create-hive-table --hive-table default.posts
 	
 # 4. Create and run a Hive/Impla query.
+## 4.a~c
+	- 작성자와 작성자가 작성한 게시물의 개수를 쿼리하여 /results 에 저장
+	insert overwrite directory '/results'
+	row format delimited fields terminated by '\t'
+	select A.id,
+		   A.first_name AS fname,
+		   A.last_name AS lname
+		   B.num_posts AS num_posts
+	from authors A
+	inner join ( select author_id, count(author_id) AS num_posts
+					from posts P
+				   group by author_id ) B
+	on A.id = B.author_id
+
+# 5. Export the data form above query to MySQL
+## 5.a	
+	CREATE TABLE `results` (
+	  `id` int NOT NULL,
+	  `fname` varchar(255) default NULL,
+	  `lname` varchar(255) default NULL,
+	  `num_posts` int default 0
+	);
+
+## 5.b	
+	sqoop export --connect jdbc:mysql://localhost/test --username training --password training --table results --export-dir /results --input-fields-terminated-by '\t'
